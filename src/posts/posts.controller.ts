@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create.post.dto';
@@ -16,11 +17,12 @@ import {
   ApiOperation,
   ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { PostDto } from 'src/common/dto/post.dto';
+import { UndefinedToNullInterceptor } from 'src/common/interceptors/undefinedToNull.interceptors';
 
+@UseInterceptors(UndefinedToNullInterceptor)
 @ApiTags('Posts')
 @Controller('community')
 export class PostsController {
